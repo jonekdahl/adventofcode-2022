@@ -22,12 +22,12 @@ assignments
 |> Seq.length
 |> printfn "Part 1: %A"
 
-let overlaps (r1: Range) (r2: Range) =
+let isWithin (r1: Range) (r2: Range) =
     let start1, end1 = r1
     let start2, end2 = r2
-    fullyContains r1 r2 || fullyContains r2 r1  || (start2 >= start1 && start2 <= end1) || (end2 >= start1 && end2 <= end1)
+    (start2 >= start1 && start2 <= end1) || (end2 >= start1 && end2 <= end1)
 
 assignments
-|> Seq.filter (fun (r1, r2) -> overlaps r1 r2)
+|> Seq.filter (fun (r1, r2) -> isWithin r1 r2 || isWithin r2 r1)
 |> Seq.length
 |> printfn "Part 2: %A"
